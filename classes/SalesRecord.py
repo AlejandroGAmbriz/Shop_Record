@@ -28,18 +28,6 @@ class SalesRecord:
         """
         self.file_path = file_path
 
-    @property
-    def services_offered(self, services_offered: list) -> list:
-        """The services offered by the seller.
-        
-        Arguments:
-            services_offered (list): list of services offered by the seller.
-            
-        Returns: 
-            list: list of names of services offered by the seller."""
-            
-        return [service.name for service in services_offered]
-
     def load_sale(self, totlal: float, services_sold: list, services_offered: list) -> None:
         """Load the sales in an excel file.
             load a new row in the excel file with the date and time,
@@ -49,7 +37,24 @@ class SalesRecord:
             total (float): the total amount of the sale.
             services_sold (list): list of services sold in the sale.
             services_offered (list): list of services offered by the seller.
+        
+        Exceptions:
+            FileNotFoundError: if the excel file does not exist.
         """
+        try:
+            df = pd.read_excel(self.file_path)
+            new_row = {col: None for col in df.columns}
+            new_row["Feche y Hora"] = pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+            for service in services_offered:
+                if service in services_sold:
+                    new_row[service] = service.price
+                else:
+                    new_row[service] = 0.0
+            new_row["Total"] = totlal
+            df = df.append(new_row, ignore_index=True)
+            df.to_excel(self.file_path, index=False)
+        except FileNotFoundError:
+            print("No se ha encontrado el archivo:", self.file_path)
 
     def box_cut(self, services_offered: list) -> None:
         """Create a new excel file with the columns:
