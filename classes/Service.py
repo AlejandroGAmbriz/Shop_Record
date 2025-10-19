@@ -3,11 +3,11 @@
 
 class Service:
     """This class represents a Service.
-    
+
     Atributes:
         name (str): the name of the service or product.
         price (float): the price of the service or product.
-    
+
     Methods:
         name() -> str:
             The name of the service or product.
@@ -17,7 +17,7 @@ class Service:
 
     def __init__(self, name: str, price: float):
         """Initialize the Service class.
-        
+
         Arguments:
             name (str): the name of the service or product.
             price (float): the price of the service or product.
@@ -28,10 +28,10 @@ class Service:
     @property
     def name(self) -> str:
         """The name of the service or product.
-        
+
         Arguments:
             name (str): the name of the service or product.
-            
+
         Returns:
             str: the name of the service or product.
         """
@@ -44,10 +44,10 @@ class Service:
     @property
     def price(self) -> float:
         """The price of the service or product.
-        
+
         Arguments:
             price (float): the price of the service or product.
-            
+
         Returns:
             float: the price of the service or product."""
         return self.price

@@ -8,10 +8,10 @@ import pandas as pd
 class SalesRecord:
     """A class representing an SalesRecord
     It will be in charg of manage the excel files
-    
+
     Atributes:
         file_path (str): the path of the excel file where the sales are recorded.
-    
+
     Methods:
         load_sale(totlal: float, services_sold: list, services_offered: list) -> None:
             load the sales in an excel file.
@@ -19,25 +19,28 @@ class SalesRecord:
             creat a new excel file and save the new excel path.
         show_daily_sales() -> None:
             Shows the daily sales in an excel file.
-        """
+    """
+
     def __init__(self, file_path: str = None):
         """Initialize the Interface class.
-        
+
         Arguments:
             file_path (str): the path of the excel file where the sales are recorded.
         """
         self.file_path = file_path
 
-    def load_sale(self, totlal: float, services_sold: list, services_offered: list) -> None:
+    def load_sale(
+        self, totlal: float, services_sold: list, services_offered: list
+    ) -> None:
         """Load the sales in an excel file.
             load a new row in the excel file with the date and time,
             the services sold and the total amount of the sale.
-            
+
         Arguments:
             total (float): the total amount of the sale.
             services_sold (list): list of services sold in the sale.
             services_offered (list): list of services offered by the seller.
-        
+
         Exceptions:
             FileNotFoundError: if the excel file does not exist.
         """
@@ -60,7 +63,7 @@ class SalesRecord:
         """Create a new excel file with the columns:
             Date and Time, services offered and Total.
             Save the new excel path in the file_path attribute.
-        
+
         Arguments:
             services_offered (list): list of services offered by the seller.
         """
@@ -70,8 +73,7 @@ class SalesRecord:
         df.to_excel(self.file_path, index=False)
 
     def show_daily_sales(self) -> None:
-        """Shows the daily sales in an excel file.
-        """
+        """Shows the daily sales in an excel file."""
         if os.path.exists(self.file_path):
             os.startfile(self.file_path)
         else:
