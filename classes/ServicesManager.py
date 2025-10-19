@@ -28,7 +28,7 @@ class ServicesManager:
     @property
     def services_offered(self) -> list[Service]:
         """Get the services_offered list."""
-        return self._services_offered
+        return self.services_offered
 
     def add_service(self) -> None:
         """Add a service to the services_offered list."""
