@@ -17,18 +17,26 @@ class ServicesManager:
         mod_service(name_service: str, to_change: str) -> None:
             Modify a service from the services_offered list."""
 
-    def __init__(self, services_offered: list[Service]):
+    def __init__(self, _services_offered: list[Service] = None):
         """Initialize the ServicesManager class.
 
         Arguments:
-            services_offered (list): list of services offered by the seller.
+            _services_offered (list): list of services offered by the seller.
         """
-        self.services_offered = services_offered
+        if _services_offered is None:
+            self._services_offered = []
+        else:
+            self._services_offered = _services_offered
 
     @property
     def services_offered(self) -> list[Service]:
         """Get the services_offered list."""
-        return self.services_offered
+        return self._services_offered
+
+    @services_offered.setter
+    def services_offered(self, services_offered: list[Service]) -> None:
+        """Set the services_offered list."""
+        self._services_offered.extend(services_offered)
 
     def add_service(self) -> None:
         """Add a service to the services_offered list."""
