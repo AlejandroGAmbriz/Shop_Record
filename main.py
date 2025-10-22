@@ -2,10 +2,10 @@
 
 from classes.SalesRecord import SalesRecord
 from classes.Seller import Seller
-from classes.Service import Service
 from classes.ServicesManager import ServicesManager
 
 services_manager = ServicesManager()
+sales_record = SalesRecord()
 
 def settings():
     """Function to manage the services offered by the seller."""
@@ -28,23 +28,34 @@ def settings():
 
 def main():
     """Main function to run the application."""
+    seller = Seller(
+        total_price=0.0, services_offered=services_manager, services_sold=[]
+    )
 
     print("Bienvenido a la app 'administrado de ventas'")
     while True:
         print("Estos son los servicios que ofrecemos: ")
         for service in services_manager.services_offered:
-            print(service)
+            print(f"[{service.name}]")
         choice = (
             input(
-                "Elija el producto a vender o escriba (s)ettings para administrar los servicios ofrecidos: "
+                """
+                [(s) para configurar servicios]         [(q) para salir]
+
+                [Escriba el producto a vender]:    
+                """
             )
             .strip()
             .lower()
         )
+        print(f"List de venta: {', ' .join(service.name for service in seller.services_sold)},")
+        print(f"Total a pagar: [${seller.total_price}]")
         if choice == "s":
             settings()
-        is_continue = input("¿Desea continuar? (s/n): ").strip().lower()
-        if is_continue == "n":
+        elif choice in [service.name for service in services_manager.services_offered]:
+            seller.add_service(choice)
+#Loop control
+        if choice == "q":
             break
 
 

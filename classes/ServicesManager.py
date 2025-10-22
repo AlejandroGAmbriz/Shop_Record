@@ -60,15 +60,18 @@ class ServicesManager:
     def mod_service(self, name_service: str, to_change: str) -> None:
         """Modify a service from the services_offered list.
         it could be the name or the price of the service."""
-        for service in self.services_offered:
-            if service.name == name_service:
-                if to_change == "name":
-                    new_name = input(
-                        "Agregue el nuevo nombre del servicio o producto: "
-                    )
-                    service.name = new_name
-                elif to_change == "price":
-                    new_price = float(
-                        input("Agregue el nuevo precio del servicio o producto: ")
-                    )
-                    service.price = new_price
+        try:
+            for service in self.services_offered:
+                if service.name == name_service:
+                    if to_change == "name":
+                        new_name = input(
+                            "Agregue el nuevo nombre del servicio o producto: "
+                        )
+                        service.name = new_name
+                    elif to_change == "price":
+                        new_price = float(
+                            input("Agregue el nuevo precio del servicio o producto: ")
+                        )
+                        service.price = new_price
+        except ValueError:
+            print("El servicio o producto no existe")
