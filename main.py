@@ -7,6 +7,7 @@ from classes.ServicesManager import ServicesManager
 services_manager = ServicesManager()
 sales_record = SalesRecord()
 
+
 def settings():
     """Function to manage the services offered by the seller."""
 
@@ -23,8 +24,9 @@ def settings():
         case "m":
             services_manager.mod_service(
                 input("Ingrese el nombre del servicio a modificar: "),
-                input("Ingrese el nuevo nombre o precio del servicio: "),
+                input("Ingrese que caracteristica desea cambiar 'name' o 'price': "),
             )
+
 
 def main():
     """Main function to run the application."""
@@ -34,33 +36,33 @@ def main():
 
     print("Bienvenido a la app 'administrado de ventas'")
     while True:
+        print("[(s) para configurar servicios]         [(q) para salir]")
         print("Estos son los servicios que ofrecemos: ")
         for service in services_manager.services_offered:
-            print(f"[{service.name}]")
+            print(f"[{service.name}] - ${service.price}")
+        print(
+            f"List de venta: {', ' .join(service.name for service in seller.services_sold)},"
+        )
+        for service in seller.services_sold:
+            seller.total_price += service.price
+        print(f"Total a pagar: [${seller.total_price}]")
         choice = (
             input(
                 """
-                [(s) para configurar servicios]         [(q) para salir]
-
                 [Escriba el producto a vender]:    
                 """
             )
             .strip()
             .lower()
         )
-        print(f"List de venta: {', ' .join(service.name for service in seller.services_sold)},")
-        print(f"Total a pagar: [${seller.total_price}]")
         if choice == "s":
             settings()
         elif choice in [service.name for service in services_manager.services_offered]:
             seller.add_service(choice)
-#Loop control
+        # Loop control
         if choice == "q":
             break
 
 
 if __name__ == "__main__":
     main()
-
-
-
