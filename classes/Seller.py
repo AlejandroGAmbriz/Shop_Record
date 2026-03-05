@@ -2,6 +2,8 @@
 
 from classes.ServicesManager import ServicesManager
 
+service_manager = ServicesManager()
+
 
 class Seller:
     """This class is responsible for managing the information of a sale,
@@ -19,7 +21,7 @@ class Seller:
     """
 
     def __init__(
-        self, total_price: float, services_offered: ServicesManager, services_sold: list
+        self, services_offered: list, services_sold: list, total_price: float = 0.0
     ):
         """Initialize the Seller class.
 
@@ -30,7 +32,7 @@ class Seller:
         """
         self.services_sold = services_sold
         self.total_price = total_price
-        self.services_offered = ServicesManager(services_offered)
+        self.services_offered = services_offered
 
     def add_service(self, service_added: str) -> None:
         """Adds a service to the services_sold list
@@ -41,12 +43,13 @@ class Seller:
         Exeptions:
             ValueError: If the service is not found in the services_sold list.
         """
-        for service in self.services_offered.services_offered:
-            if service.name == service_added:
+
+        for service in service_manager.services_offered:
+            if service.name.strip().lower() == service_added:
                 self.services_sold.append(service)
                 break
-            else:
-                raise ValueError("El servicio o producto no existe")
+        else:
+            raise ValueError("El servicio o producto no existe")
 
     def remove_service(self, service_removed: str) -> None:
         """Removes a service from the services_sold list.
