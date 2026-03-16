@@ -1,4 +1,7 @@
-"""This module defins the Service class."""
+"""
+Service module
+Gives classes for manage the Services Logic
+"""
 
 
 class Service:
