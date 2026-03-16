@@ -16,8 +16,7 @@ The following features are planned for the final version of shop_record. This ch
 ### 🔄 Inventory Management
 - [ ] Add new products/services to catalog
 - [ ] Edit product details (name, price)
-- [ ] Automatically update stock after each sale
-- [ ] Alert when stock is low or depleted
+
 ### 🧾 Sales Operations
 - [ ] Register multi-product transactions
 - [ ] Calculate total cost and apply discounts
