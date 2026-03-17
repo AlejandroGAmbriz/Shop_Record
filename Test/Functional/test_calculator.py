@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 class TestCalculator(unittest.TestCase):
     """
-    Test the Calculator functionality
+    Test the Calculator functionality of sum an item list
     """
     def setUp(self):
         """
