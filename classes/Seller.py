@@ -1,79 +1,47 @@
-"""This module defins the Seller class."""
+"""
+Seller module
+Gives classes for manage the flow of the system
+"""
 
-from classes.ServicesManager import ServicesManager
-
-service_manager = ServicesManager()
-
+from classes.services_manager import ServicesManager
+from classes.service import Service
 
 class Seller:
-    """This class is responsible for managing the information of a sale,
-    such as the list of services sold and the total.
+    """
+    Manage the flow system to interact with the user.
 
-    Attributes:
-        services_sold (list): list of services in a sale.
-        total (float): total amount of the sale.
-        services_offered (ServicesManager): instance of ServicesManager class.
-
-    Methods:
-        add_service: Adds a service to the services_sold list.
-        remove_service: Removes a service from the services_sold list.
-        calculate_total: Calculates the total amount of the sale.
+    This class handles user interactions, directing requests
+    through the appropriate workflow steps.
     """
 
-    def __init__(
-        self, services_offered: list, services_sold: list, total_price: float = 0.0
-    ):
+    def __init__(self):
         """Initialize the Seller class.
 
         Arguments:
             services_sold (list): list of services in a sale.
             total (float): total amount of the sale.
-            services_offered (ServicesManager): instance of ServicesManager class.
+            services_manager (ServicesManager): instance of ServicesManager class.
         """
-        self.services_sold = services_sold
-        self.total_price = total_price
-        self.services_offered = services_offered
+        self.services_sold = []
+        self.total_price = 0.0
+        self.services_manager = ServicesManager()
+    def show_services_offered(self):
+        """
+        Shows the services offered
+        """
+        for service in self.services_manager.services_offered:
 
-    def add_service(self, service_added: str) -> None:
-        """Adds a service to the services_sold list
+            print(service.name)
 
-        Arguments:
-            service_added (str): name of the service to be added.
-
-        Exeptions:
-            ValueError: If the service is not found in the services_sold list.
+    def system_loop (self):
+        """
+        Manage the System Loop
         """
 
-        for service in service_manager.services_offered:
-            if service.name.strip().lower() == service_added:
-                self.services_sold.append(service)
+        while True:
+
+            self.show_services_offered()
+            option = input("Seleccione el producto a vender")
+
+            if option == "quit":
                 break
-        else:
-            raise ValueError("El servicio o producto no existe")
-
-    def remove_service(self, service_removed: str) -> None:
-        """Removes a service from the services_sold list.
-
-        Arguments:
-            service_removed (str): name of the service to be removed.
-
-        Exeptions:
-            ValueError: If the service is not found in the services_sold list."""
-        for service in self.services_sold:
-            if service.name == service_removed:
-                self.services_sold.remove(service)
-                break
-            else:
-                raise ValueError(
-                    "El servicio o producto no se encuentra en la lista de venta"
-                )
-
-    def calculate_total(self) -> float:
-        """Calculates the toatl amoun of the sale.
-
-        returns:
-            float: total amount of the sale.
-        """
-        for service in self.services_sold:
-            self.total_price += service.price
-        return self.total_price

@@ -30,7 +30,7 @@ class ServicesManager:
     @services_offered.setter
     def services_offered(self, services_offered: list[Service]) -> None:
         """Set the services_offered list."""
-        self._services_offered.extend(services_offered)
+        self._services_offered = services_offered
 
     def add_service(self) -> None:
         """Add a service to the services_offered list."""
