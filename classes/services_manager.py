@@ -32,47 +32,23 @@ class ServicesManager:
         """Set the services_offered list."""
         self._services_offered = services_offered
 
-    def add_service(self) -> None:
+    def add_service(self, new_servicie_name: str, new_service_price: int) -> None:
         """Add a service to the services_offered list."""
-        input_name = input("Agregue el nombre del servicio o producto: ")
-        input_price = float(input("Agregue el precio del servicio o producto: "))
+        service = Service(new_servicie_name, new_service_price)
+        self.services_offered.append(service)
 
-        service = Service(input_name, input_price)
-
-        if service not in self.services_offered:
-            self.services_offered.append(service)
-        else:
-            print("El servicio o producto ya existe")
-
-    def remove_service(self, name_service: str) -> None:
+    def remove_service(self, service: Service) -> None:
         """Remove a service from the services_offered list."""
-        for service in self.services_offered:
-            if service.name == name_service:
-                self.services_offered.remove(service)
-                break
-            else:
-                print("El servicio o producto no existe")
+        self.services_offered.remove(service)
 
-    def mod_service(self, name_service: str, to_change: str) -> None:
+
+    def mod_service(self, service: Service, to_change: str) -> None:
         """Modify a service from the services_offered list.
         it could be the name or the price of the service."""
-        if name_service not in self._services_offered:
+        if to_change == "name":
+            new_name = input("Agregue el nuevo nombre del servicio o producto: ")
+            service.name = new_name
 
-            for service in self.services_offered:
-                if service.name == name_service:
-                    if to_change == "name":
-
-                        new_name = input(
-                            "Agregue el nuevo nombre del servicio o producto: "
-                        )
-                        service.name = new_name
-
-                    elif to_change == "price":
-
-                        new_price = float(
-                            input("Agregue el nuevo precio del servicio o producto: ")
-                        )
-                        service.price = new_price
-
-        else:
-            print("El servicio o producto no existe")
+        elif to_change == "price":
+            new_price = float(input("Agregue el nuevo precio del servicio o producto: "))
+            service.price = new_price
