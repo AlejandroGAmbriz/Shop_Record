@@ -1,4 +1,4 @@
-![Versión](https://img.shields.io/github/v/tag/AlejandroGAmbriz/Shop_Record?label=versión&sort=semver)
+![Versión](https://img.shields.io/github/v/tag/AlejandroGAmbriz/Shop_Record?label=versión&sort=semver&cacheSeconds=3600)
 # shop_record
 This project aims to develop a sales recording system for small shops and businesses, 
 enabling efficient inventory management, multi-product sales operations, and daily sales 
