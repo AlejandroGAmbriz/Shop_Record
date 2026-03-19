@@ -14,8 +14,8 @@ To empower small business owners with a practical tool that simplifies daily ope
 ## 📌 Planned Features
 The following features are planned for the final version of shop_record. This checklist:
 ### 🔄 Inventory Management
-- [ ] Add new products/services to catalog
-- [ ] Edit product details (name, price)
+- [x] Add new products/services to catalog
+- [x] Edit product details (name, price)
 
 ### 🧾 Sales Operations
 - [ ] Register multi-product transactions
