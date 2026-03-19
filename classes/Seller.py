@@ -67,7 +67,7 @@ class Seller:
 
             elif settings_option == "Mod":
 
-                service_name = input("Escriba el servicio a remover: ")
+                service_name = input("Escriba el servicio a modificar: ")
                 to_change = input("Escriba la caracteristica a cambiar: ")
 
                 for service in self.services_manager.services_offered:
