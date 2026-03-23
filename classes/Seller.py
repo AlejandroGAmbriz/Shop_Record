@@ -5,6 +5,7 @@ Gives classes for manage the flow of the system
 
 from classes.services_manager import ServicesManager
 from classes.service import Service
+from classes.calculator import Calculator
 
 class Seller:
     """
@@ -22,9 +23,7 @@ class Seller:
             total (float): total amount of the sale.
             services_manager (ServicesManager): instance of ServicesManager class.
         """
-        #TODO: services_sold y total_price cuold be part of the calculator, chek it.
-        self.services_sold = []
-        self.total_price = 0.0
+        self.calculator = Calculator()
         self.services_manager = ServicesManager()
 
     def show_services_offered(self) -> None:
@@ -86,6 +85,13 @@ class Seller:
         while True:
 
             self.show_services_offered()
+
+            print("Lista de Venta: ")
+            for service in self.calculator.sold_services:
+                print(service.name)
+
+            print (f"Total: ${self.calculator.total_sum()}")
+
             option = input("Seleccione el producto a vender: ")
 
             if option == "quit":
@@ -94,3 +100,22 @@ class Seller:
             elif option == "settings":
 
                 self.settings_loop()
+
+            elif option == "remove":
+                remove_option = input("Escriba el servico a eliminar de la lista de venta: ")
+                for service in self.calculator.sold_services:
+                    if remove_option in service.name:
+                        self.calculator.remove_service_sold(service)
+                        break
+
+                else:
+                    print("Servicio no encontrado")
+
+            else:
+                for service in self.services_manager.services_offered:
+                    if option in service.name:
+                        self.calculator.add_service_sold(service)
+                        break
+
+                else:
+                    print("Servicio no encontrado")
