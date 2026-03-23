@@ -26,7 +26,7 @@ class Calculator:
     def total_sum(self) -> int:
         """Gives the total amount of the"service list"""
         total_amount = 0
-        
+
         for service in self.sold_services:
             total_amount += service.price
 
