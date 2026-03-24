@@ -1,4 +1,4 @@
 .vscode/settings.json
-classes/__pycache__/
-Test/__pycache__/
+__pycache__/
+.venv
 .coverage

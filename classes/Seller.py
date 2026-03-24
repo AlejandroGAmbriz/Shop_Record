@@ -7,6 +7,7 @@ from classes.services_manager import ServicesManager
 from classes.service import Service
 from classes.calculator import Calculator
 
+
 class Seller:
     """
     Manage the flow system to interact with the user.
@@ -38,7 +39,7 @@ class Seller:
         """
         Manage the settings loop for change on the offered services list
         """
-        settings_option =""
+        settings_option = ""
         while settings_option != "quit":
 
             settings_option = input("Escriba la funcion que desee realizar: ")
@@ -46,10 +47,14 @@ class Seller:
             if settings_option == "Add":
 
                 new_service_name = input("Agregue el nombre del servicio o producto: ")
-                new_service_price = float(input("Agregue el precio del servicio o producto: "))
+                new_service_price = float(
+                    input("Agregue el precio del servicio o producto: ")
+                )
 
                 if new_service_name not in self.services_manager.services_offered:
-                    self.services_manager.add_service(new_service_name, new_service_price)
+                    self.services_manager.add_service(
+                        new_service_name, new_service_price
+                    )
                 else:
                     print("El servicio o producto ya existe")
 
@@ -77,7 +82,7 @@ class Seller:
                 else:
                     print("El servicio no se encuentra en la lista.")
 
-    def system_loop (self) -> None:
+    def system_loop(self) -> None:
         """
         Manage the System Loop
         """
@@ -90,7 +95,7 @@ class Seller:
             for service in self.calculator.sold_services:
                 print(service.name)
 
-            print (f"Total: ${self.calculator.total_sum()}")
+            print(f"Total: ${self.calculator.total_sum()}")
 
             option = input("Seleccione el producto a vender: ")
 
@@ -102,7 +107,9 @@ class Seller:
                 self.settings_loop()
 
             elif option == "remove":
-                remove_option = input("Escriba el servico a eliminar de la lista de venta: ")
+                remove_option = input(
+                    "Escriba el servico a eliminar de la lista de venta: "
+                )
                 for service in self.calculator.sold_services:
                     if remove_option in service.name:
                         self.calculator.remove_service_sold(service)
