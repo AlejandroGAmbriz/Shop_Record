@@ -18,7 +18,7 @@ The following features are planned for the final version of shop_record. This ch
 - [x] Edit product details (name, price)
 
 ### 🧾 Sales Operations
-- [ ] Register multi-product transactions
+- [x] Register multi-product transactions
 - [ ] Calculate total cost and apply discounts
 - [ ] Record date and time of each sale
 ### 📊 Reporting
