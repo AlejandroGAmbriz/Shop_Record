@@ -6,7 +6,7 @@ Gives classes for manage the flow of the system
 from classes.services_manager import ServicesManager
 from classes.service import Service
 from classes.calculator import Calculator
-
+from classes.sales_record import SalesRecord
 
 class Seller:
     """
@@ -24,6 +24,7 @@ class Seller:
             total (float): total amount of the sale.
             services_manager (ServicesManager): instance of ServicesManager class.
         """
+        self.sales_record = SalesRecord()
         self.calculator = Calculator()
         self.services_manager = ServicesManager()
 
@@ -82,6 +83,19 @@ class Seller:
                 else:
                     print("El servicio no se encuentra en la lista.")
 
+    def sales_report_loop(self):
+        """Manage the loop of the sales report manager"""
+        sales_report_option= ""
+        while sales_report_option != "quit":
+
+            sales_report_option = input("Escriba la funcion a realizar: ")
+
+            if sales_report_option == "show":
+                self.sales_record.show_daily_sales()
+
+            elif sales_report_option == "add sell":
+                self.sales_record.register_sale(self.calculator.sold_services)
+
     def system_loop(self) -> None:
         """
         Manage the System Loop
@@ -105,6 +119,10 @@ class Seller:
             elif option == "settings":
 
                 self.settings_loop()
+
+            elif option == "Sales report":
+
+                self.sales_report_loop()
 
             elif option == "remove":
                 remove_option = input(

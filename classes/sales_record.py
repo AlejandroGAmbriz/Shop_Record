@@ -1,80 +1,65 @@
 """This module defins the SalesRecord class."""
 
-from datetime import date
+from datetime import date, datetime
 import os
 import pandas as pd
 
+from classes.service import Service
+from classes.constants import COLUMNS
+
 
 class SalesRecord:
-    """A class representing an SalesRecord
-    It will be in charg of manage the excel files
-
-    Atributes:
-        file_path (str): the path of the excel file where the sales are recorded.
-
-    Methods:
-        load_sale(totlal: float, services_sold: list, services_offered: list) -> None:
-            load the sales in an excel file.
-        box_cut(services_offered: list) -> None:
-            creat a new excel file and save the new excel path.
-        show_daily_sales() -> None:
-            Shows the daily sales in an excel file.
+    """
+    It will be in charg of manage the excel files, how contain the sales record
     """
 
-    def __init__(self, file_path: str = None):
+    def __init__(self):
         """Initialize the Interface class.
 
         Arguments:
             file_path (str): the path of the excel file where the sales are recorded.
         """
-        self.file_path = file_path
 
-    def load_sale(
-        self, totlal: float, services_sold: list, services_offered: list
-    ) -> None:
-        """Load the sales in an excel file.
-            load a new row in the excel file with the date and time,
-            the services sold and the total amount of the sale.
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-        Arguments:
-            total (float): the total amount of the sale.
-            services_sold (list): list of services sold in the sale.
-            services_offered (list): list of services offered by the seller.
+        db_dir = os.path.join(base_dir, "DB")
+        file_name = f"slaes_record_{date.today().strftime('%y-%m-%d')}.xlsx"
 
-        Exceptions:
-            FileNotFoundError: if the excel file does not exist.
-        """
-        try:
-            df = pd.read_excel(self.file_path)
-            new_row = {col: None for col in df.columns}
-            new_row["Feche y Hora"] = pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
-            for service in services_offered:
-                if service in services_sold:
-                    new_row[service] = service.price
-                else:
-                    new_row[service] = 0.0
-            new_row["Total"] = totlal
-            df = df.append(new_row, ignore_index=True)
-            df.to_excel(self.file_path, index=False)
-        except FileNotFoundError:
-            print("No se ha encontrado el archivo:", self.file_path)
+        self.file_path = os.path.join(db_dir, file_name)
+        self.load_sales_record_file()
 
-    def box_cut(self, services_offered: list) -> None:
-        """Create a new excel file with the columns:
-            Date and Time, services offered and Total.
-            Save the new excel path in the file_path attribute.
+    def _create_sales_record_file(self) -> None:
+        """Create the excel file"""
 
-        Arguments:
-            services_offered (list): list of services offered by the seller.
-        """
-        columns = ["Feche y Hora"] + services_offered + ["Total"]
-        df = pd.DataFrame(columns=columns)
-        self.file_path = f"Ventas del día{date.today().strftime('%Y-%m-%d')}.xlsx"
+        df = pd.DataFrame(columns=COLUMNS)
         df.to_excel(self.file_path, index=False)
+
+        print(f"Archivo creado en: {self.file_path}")
+
+    def load_sales_record_file(self) -> None:
+        """Loath the Excel file path"""
+        if not os.path.exists(self.file_path):
+            self._create_sales_record_file()
 
     def show_daily_sales(self) -> None:
         """Shows the daily sales in an excel file."""
-        if os.path.exists(self.file_path):
-            os.startfile(self.file_path)
-        else:
-            print("No existe el archivo:", self.file_path)
+        os.startfile(self.file_path)
+
+    def register_sale(self, sold_services: list[Service]):
+        """Adds the sales to the record"""
+        for service in sold_services:
+            sales_values = [
+                date.today().strftime("%y-%m-%d"),
+                datetime.now().strftime("%H:%M"),
+                service.name,
+                service.price,
+            ]
+
+            new_entry = dict(zip(COLUMNS, sales_values))
+
+            df = pd.read_excel(self.file_path)
+            df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
+
+            df.to_excel(self.file_path, index=False)
+
+        print("Venta agregada")
