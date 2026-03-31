@@ -20,9 +20,9 @@ The following features are planned for the final version of shop_record. This ch
 ### 🧾 Sales Operations
 - [x] Register multi-product transactions
 - [ ] Calculate total cost and apply discounts
-- [ ] Record date and time of each sale
+- [x] Record date and time of each sale
 ### 📊 Reporting
-- [ ] Generate daily sales reports in Excel
+- [x] Generate daily sales reports in Excel
 - [ ] Summarize total revenue and units sold per day
 - [ ] Export filtered reports by date range or product
 - [ ] Visualize sales trends
