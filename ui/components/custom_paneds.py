@@ -8,22 +8,28 @@ class CustomPaned():
         self.custom_frames = CustomFrames()
 
     def home_paned(self, master):
-        body_frame = tk.PanedWindow(master, relief="ridge", orient=tk.HORIZONTAL)
-        body_frame.pack(fill="both", expand=True)
+        """Home paned to make the sells"""
+        main_padend = tk.PanedWindow(master, relief="ridge", orient=tk.HORIZONTAL)
+        main_padend.pack(fill="both", expand=True)
 
-        item_frame = self.custom_frames.item_buttons_frame(body_frame)
-        item_frame.config(width=300)
+        rigth_padend = tk.PanedWindow(master, relief="ridge", orient=tk.VERTICAL)
+        rigth_padend.pack(fill="y", expand=True)
 
-        total_frame = self.custom_frames.total_frame(body_frame)
-        total_frame.config(width=5)
+        item_frame = self.custom_frames.item_buttons_frame(main_padend)
 
-        body_frame.add(total_frame, minsize=50)
-        body_frame.add(item_frame, minsize=200)
+        total_frame = self.custom_frames.total_frame(rigth_padend)
+        breakdown_frame = self.custom_frames.breakdown_frame(rigth_padend)
 
+        rigth_padend.add(total_frame, minsize=100, width= 180)
+        rigth_padend.add(breakdown_frame, minsize=200, width= 500)
 
-        return body_frame
+        main_padend.add(item_frame, minsize=200, width=980)
+        main_padend.add(rigth_padend, minsize = 200, width = 300)
+
+        return main_padend
 
     def graphs_paned(self, master):
+        """Graph paned to check the records"""
         body_frame = tk.PanedWindow(master, relief="ridge")
         body_frame.pack(side="bottom", fill="both", expand=True)
 

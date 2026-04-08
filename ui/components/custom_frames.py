@@ -21,18 +21,19 @@ class CustomFrames():
         return top_frame
 
     def item_buttons_frame(self, master):
-        """Keeps the item buttons for sell"""
+        """Frame for the item buttons for sell"""
         body_frame = tk.Frame(master, background="pink", relief="ridge")
-        body_frame.pack(side="left", fill="y")
 
         return body_frame
 
     def total_frame(self, master):
-        """Total of the sell"""
+        """Frame of the Total of the sell"""
         frame_total = tk.Frame(master, background="red")
-        frame_total.pack(side="right", fill="y")
 
         return frame_total
 
     def breakdown_frame(self, master):
-        pass
+        """Frame for the breakdown of the sell"""
+        frame_breakdown = tk.Frame(master, background="grey")
+
+        return frame_breakdown
