@@ -1,5 +1,6 @@
 """Contains the custom buttopns"""
 import tkinter as tk
+
 class CustomButtons:
     """Container the custom buttons"""
     def __init__(self):
